@@ -1,13 +1,20 @@
 # foodies
 APP NAME = FOODIES
+
 END TO END IMPLEMENTATION CI/CD PIPELINE DEPLOYING THE APPLICATION ON  KUBERNETES CLUSTER
 
 Setup Jenkins Server on EC2 (OR) Local Machine:
 Steps:
+
+
 1.Login into the jenkins server machine
+    
     1.1 sudo apt update -y
+    
     1.2 sudo apt install -y openjdk-11-jdk
+
     1.3 add the jenkins repository to the our ubuntu sources.list
+        
         curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
         /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 
