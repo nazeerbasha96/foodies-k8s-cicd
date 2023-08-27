@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage ('Clone Code') {
             steps {
-                git url: "https://github.com/nazeerbasha96/K8S.git" , branch: "master"
+                git url: "https://github.com/nazeerbasha96/foodies-k8s-cicd.git" , branch: "master"
             }
         }
         stage ('Create a k8s cluster' ){
