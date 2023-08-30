@@ -5,10 +5,10 @@ terraform {
     }
   }
 #   backend "s3" {
-#   bucket = "urotaxi1.0-tfstate-bucket"
+#   bucket = "foodies.0-tfstate-bucket"
 #   region = "ap-south-1"
 #   key = "terraform.tfstate"
-#   dynamodb_table = "urotaxi-terraform-lock"
+#   dynamodb_table = "foodies-terraform-lock"
 # }
 }
 
@@ -47,7 +47,7 @@ module "eks_cluster" {
   cluster_version = "1.27"
   subnet_id       = module.k8s_public_subnet[*].public_id
   cluster_name    = var.eks_cluster_name
-  eks_iam_role_name = var.eks_cluster_name
+  eks_iam_role_name = var.eks_iam_role_name
 
 }
 module "eks_role" {
@@ -55,6 +55,7 @@ module "eks_role" {
   eks_cluster_name = var.eks_cluster_name
   subnet_id        = module.k8s_public_subnet[*].public_id
   depends_on       = [module.eks_cluster]
+
 }
 
 
