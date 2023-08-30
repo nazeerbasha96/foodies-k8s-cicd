@@ -1,0 +1,35 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+ name: foodies-deployment
+spec: 
+ replicas: 2 
+ strategy: 
+  type: Recreate 
+ selector: 
+  matchLabels: 
+   app: foodies 
+ template: 
+   metadata: 
+    labels: 
+     app: foodies 
+   spec: 
+    containers: 
+    - name: foodies-deployment-container 
+      image: nazeeerbs/foodies:latest
+      ports:
+        - containerPort: 8080
+      readinessProbe: 
+        httpGet:
+          path: /foodies/actuator/health/readiness
+          port: 8080
+        initialDelaySeconds: 15
+        timeoutSeconds: 15
+        failureThreshold: 3
+      livenessProbe:
+        httpGet:
+          path: /foodies/actuator/health/liveness
+          port: 8080
+        initialDelaySeconds: 15
+        timeoutSeconds: 15
+        failureThreshold: 3
