@@ -26,3 +26,5 @@ target/
 .classpath
 .project
 bin/
+.terraform.lock.hcl
+.terraform/
