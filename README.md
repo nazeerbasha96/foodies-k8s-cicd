@@ -37,3 +37,44 @@ Steps:
      sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
     1.9 once we copy paste the password into the jenkins console, it prompts for installing suggested plugins, click on it will begin the setup and finally enter username, password to register and use jenkins
+
+
+2. Docker install
+   
+   2.1 Install Docker Engine on Ubuntu Refer the below link
+       Link : https://docs.docker.com/engine/install/ubuntu/
+   
+    2.2 Execute this command: sudo useradd -aG docker jenkins
+
+3. Install Docker Plugin
+  
+
+Jenkins has a Docker plugin that enables communication with Docker hosts. To install the plugin in Jenkins, do the following:
+
+ 3.1 Select Manage Jenkins in the menu on the left side of the Jenkins dashboard.
+ ![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/176f1c66-53cd-441d-a0c8-8377b15a32bc)
+
+3.2. Click Manage Plugins in the Manage Jenkins window.
+
+ ![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/2bca3656-5de3-4f55-92c9-edbc7d396a37)
+3.3 Select the Available tab in the Plugin Manager window.
+
+3.4 Type Docker in the search field, and select the box next to the Docker plugin that appears in the search results.
+
+3.5 Click the Download now and install after restart button.
+![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/9bdd4efc-71ab-4a38-b601-221009704983)
+3.6 When all the necessary plugin components download, select the box at the bottom of the screen to restart Jenkins.
+![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/1d43dae3-d767-449b-ba29-a33cbb72bb99)
+
+4 install kubectl 
+LINK :  https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+
+5.Install AWS Cli refer this 
+Link : https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+
+
+
+
+
