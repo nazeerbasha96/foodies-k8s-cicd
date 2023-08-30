@@ -5,9 +5,10 @@ pipeline {
         terraform 'tf'
     }
      environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        // AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY')
+        // AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION= 'ap-south-1'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
 
     stages {
@@ -18,7 +19,14 @@ pipeline {
         }
         stage ('Create a k8s cluster' ){
             steps{
+                withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID',credentialsId:'AWS_KEYS',secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]){
                 sh '''
+                    //S3 bucket Configuring Remote State Backend 
+                    
+                    aws s3 mb s3://foodies.0-tfstate-bucket --region ap-south-1
+
+                    // K8S creation using terraform 
+
                     terraform -chdir=Terraform/Golbal/ init
                     terraform -chdir=Terraform/Golbal/ plan
                     terraform -chdir=Terraform/Golbal/ apply --auto-aprove
@@ -44,12 +52,22 @@ pipeline {
         }
         stage ('push Image'){
             steps{
-                withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerhubpass",usernameVariable:"dockerhubuser")]){
-                sh "docker image tag foodies ${env.dockerhubuser}/foodies:latest"
-                sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}" 
-                sh "docker push ${env.dockerhubuser}/foodies:latest"
+                // withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerhubpass",usernameVariable:"dockerhubuser")])
+                withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){
+                sh '''
+                    docker image tag foodies $DOCKERHUB_CREDENTIALS_USR/foodies:latest
+                    // sh "docker login -u ${env.dockerhubuser} -p ${env.dockerhubpass}" 
+                    docker push $DOCKERHUB_CREDENTIALS_USR/foodies:latest
+                '''
+            }
+            // this block will logout the docker credentials after pushing the docker image to DCR
+            post {
+                always{
+                    sh "docker logout"
+                }
             }
         }
+            // to work this stage need install (CloudBees AWS Credentials Plugin) OR (Pipeline AWS Steps plugin) add access key and screct key in credentials in aws credentials
         stage('deploy app in K8s cluster'){
             steps{
                 withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID',credentialsId:'AWS_KEYS',secretKeyVariable:'AWS_SECRET_ACCESS_KEY')])
@@ -58,7 +76,20 @@ pipeline {
                     kubectl create -f .
                 '''
             }
-        }  
+        }
+        stage ('input step for destroy'){
+            input {
+                message : "Do you want destroy? k8s cluster and s3 bucket also confirm it"
+                ok "yes"
+
+            }
+            steps {
+                sh ''' 
+                    terraform -chdir=Terraform/Golbal/ destroy --auto-aprove
+                    aws s3 rb s3://foodies.0-tfstate-bucket --force
+                '''
+            }
+        } 
     }
 }
 
