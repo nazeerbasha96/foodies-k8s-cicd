@@ -4,12 +4,12 @@ terraform {
       source = "hashicorp/aws"
     }
   }
-#   backend "s3" {
-#   bucket = "foodies.0-tfstate-bucket"
-#   region = "ap-south-1"
-#   key = "terraform.tfstate"
-#   dynamodb_table = "foodies-terraform-lock"
-# }
+  backend "s3" {
+  bucket = "foodies.0-tfstate-bucket"
+  region = "ap-south-1"
+  key = "terraform.tfstate"
+  # dynamodb_table = "foodies-terraform-lock"
+}
 }
 
 
