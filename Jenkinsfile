@@ -26,7 +26,7 @@ pipeline {
                 
                         terraform -chdir=Terraform/Golbal/ init
                         terraform -chdir=Terraform/Golbal/ plan
-                        terraform -chdir=Terraform/Golbal/ apply --auto-aprove
+                        terraform -chdir=Terraform/Golbal/ apply --auto-approve
                     ''' 
                 }
             }
@@ -86,7 +86,7 @@ pipeline {
             }
             steps {
                 sh ''' 
-                    terraform -chdir=Terraform/Golbal/ destroy --auto-aprove
+                    terraform -chdir=Terraform/Golbal/ destroy --auto-approve
                     aws s3 rb s3://foodies.0-tfstate-bucket --force
                 '''
             }
