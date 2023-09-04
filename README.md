@@ -70,19 +70,33 @@ Jenkins has a Docker plugin that enables communication with Docker hosts. To ins
 3.6 When all the necessary plugin components download, select the box at the bottom of the screen to restart Jenkins.
 ![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/1d43dae3-d767-449b-ba29-a33cbb72bb99)
 
-4 install kubectl 
+4. install AWS plugin in jenkins server
+   
+5. install kubectl 
 
 LINK :  
             
         https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 
 
-5.Install AWS Cli refer this 
+6. Install AWS Cli refer this 
 
 Link :  
     
     https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
+To access the application need ALB Endpoint 
+    1. login to aws account
+    2. go to EC2 section
+    3. go to load balancer section 
+
+    URL to access the application is
+        http:// (LOADBALANCER ENDPOINT ):8080/foodies/home
+
+        ![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/fe81416d-ceed-44aa-a9f3-b92aaa4bde28)
+
+    
+    
 
 
 
