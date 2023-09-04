@@ -4,8 +4,12 @@ APP NAME = FOODIES
 END TO END IMPLEMENTATION CI/CD PIPELINE DEPLOYING THE APPLICATION ON  KUBERNETES CLUSTER
 
 Setup Jenkins Server on EC2 (OR) Local Machine:
+Prerequisites:
+    install below s/w in  jenkins server 
+       
+        1. install AWS Cli 
+        2. install kubectl 
 Steps:
-
 
 1.Login into the jenkins server machine
     
@@ -67,11 +71,17 @@ Jenkins has a Docker plugin that enables communication with Docker hosts. To ins
 ![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/1d43dae3-d767-449b-ba29-a33cbb72bb99)
 
 4 install kubectl 
-LINK :  https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+LINK :  
+            
+        https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 
 
 5.Install AWS Cli refer this 
-Link : https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+Link :  
+    
+    https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 
 
