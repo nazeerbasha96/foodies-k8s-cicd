@@ -94,10 +94,10 @@ To access the application need ALB Endpoint
         http:// (LOADBALANCER ENDPOINT ):8080/foodies/home
 
         
-![image](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/fe81416d-ceed-44aa-a9f3-b92aaa4bde28)
 
     
     
+![Screenshot 2023-09-04 122249](https://github.com/nazeerbasha96/foodies-k8s-cicd/assets/118157073/4d4eb2a1-cee2-4739-b8a0-8935ad8fa063)
 
 
 
