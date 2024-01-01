@@ -85,10 +85,14 @@ pipeline {
                 ok "yes"
             }
             steps {
-                sh ''' 
-                    terraform -chdir=Terraform/Golbal/ destroy --auto-approve
-                    aws s3 rb s3://foodies.0-tfstate-bucket --force
-                '''
+                withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID',credentialsId:'AWS_KEYS',secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]){
+                    sh ''' 
+                        kubectl delete -f .
+                        terraform -chdir=Terraform/Golbal/ destroy --auto-approve
+                        aws s3 rb s3://foodies.0-tfstate-bucket --force
+                    '''
+                }
+                
             }
         }
         
