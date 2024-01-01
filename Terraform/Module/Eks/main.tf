@@ -41,11 +41,12 @@ resource "aws_eks_cluster" "eks_cluster" {
   }
   depends_on = [ aws_iam_role_policy_attachment.AmazonEKSClusterPolicy ]
 }
-# resource "aws_eks_addon" "corerdns" {
-#   addon_name = "corerdns"
-#   cluster_name = aws_eks_cluster.eks_cluster.name
-#   resolve_conflicts_on_create = "OVERWRITE"
-# }
+resource "aws_eks_addon" "corerdns" {
+  addon_name = "corerdns"
+  cluster_name = aws_eks_cluster.eks_cluster.name
+  addon_version = "v1.10.1-eksbuild.1"  
+  resolve_conflicts_on_create = "OVERWRITE"
+}
 # resource "aws_eks_addon" "Vpc-CNI" {
 #   addon_name = "vpc-cni"
 #   cluster_name = aws_eks_cluster.eks_cluster.name

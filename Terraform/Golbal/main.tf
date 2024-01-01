@@ -8,7 +8,7 @@ terraform {
   bucket = "foodies.0-tfstate-bucket"
   region = "ap-south-1"
   key = "terraform.tfstate"
-  # dynamodb_table = "foodies-terraform-lock"
+  dynamodb_table = "foodies-terraform-lock"
 }
 }
 
